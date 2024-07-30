@@ -1,13 +1,1286 @@
-"
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atyab Kaake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://raw.githubusercontent.com/AtyabKaake/AtyabKaake.github.io/master/Images/background.png') no-repeat center center fixed;
+            background-size: cover;
+            /* background-color: #935f37; */
+            text-align: center;
+        }
+
+        header {
+            font-family: 'Permanent Marker', cursive;
+            background-color: transparent;
+            color: #653C13;
+            padding: 1rem;
+            margin-bottom: 0;
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #logo {
+            position: absolute;
+            display: none;
+            width: 100px;
+        }
+
+        .hide-menu-title #menuTitle {
+            display: none;
+        }
+
+        .show-logo #logo {
+            display: block;
+        }
+
+        .button-container {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-button {
+            background-color: #653C13;
+            color: #FFFFF0;
+            border: none;
+            padding: 1rem 2rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .menu-button:hover {
+            background-color: #333;
+        }
+
+        #menu {
+            margin-top: 0;
+        }
+
+        .menu-header {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .branch {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .back-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-right: 0.5rem;
+        }
+
+        .back-button svg {
+            width: 2rem;
+            height: 2rem;
+            fill: #653C13;
+        }
+
+        .category {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #653C13;
+            background-color: white;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            text-decoration: underline;
+        }
+
+        .menu-item {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #765218;
+        }
+
+        .menu-item h3 {
+            margin: 0.5rem 0;
+        }
+
+        .menu-item div {
+            width: 33%;
+            text-align: left;
+        }
+
+        .menu-item .price {
+            width: 33%;
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            color: #D61B1A;
+        }
+
+        /* Media queries for responsiveness */
+        @media (min-width: 600px) {
+            .menu-item div {
+                width: 33%;
+                text-align: left;
+            }
+
+            .menu-item .price {
+                width: 33%;
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .menu-button {
+                width: auto;
+                max-width: none;
+            }
+
+            .menu-header {
+                flex-direction: row;
+            }
+        }
+
+        .last-item {
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Atyab Kaake Menu</h1>
+    <header>
+        <h1 id="menuTitle">Our Menu</h1>
+        <!-- <img id="logo" src="https://raw.githubusercontent.com/AtyabKaake/AtyabKaake.github.io/master/Images/Logo.png"
+            alt="Logo" style="width: 100px;"> -->
+    </header>
+
+    <div class="button-container" id="buttons">
+        <button class="menu-button" onclick="showMenu('mejdlaya')">Mejdlaya Menu</button>
+        <button class="menu-button" onclick="showMenu('ehden')">Ehden Menu</button>
+    </div>
+    <div id="menu"></div>
+    <script>
+        const menus = {
+            mejdlaya: {
+                phone: "81 54 56 12 | 06 66 45 39",
+                hours: "Monday - Saturday: 08:00 AM - 10:00 PM",
+                categories: [
+                    {
+                        category: "Breakfast",
+                        items: [
+                            {
+                                name_en: "Omelette",
+                                description_en: "",
+                                price: "1.34$",
+                                name_ar: "اومليت",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Omelette with Vegetables",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "اومليت مع خضرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Omelette with Cheese",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "اومليت مع جبنة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Omelette with Labneh",
+                                description_en: "",
+                                price: "1.67$",
+                                name_ar: "اومليت مع لبنة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Eggs",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "بيض",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Fried Eggs (3 Pieces)",
+                                description_en: "",
+                                price: "1.67$",
+                                name_ar: "بيض مقلي (٣ قطع)",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Kawarma with Eggs",
+                                description_en: "",
+                                price: "2.56$",
+                                name_ar: "بيض مع قورما",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Keshek",
+                                description_en: "",
+                                price: "1.87$",
+                                name_ar: "كشك",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Mouhamorra",
+                                description_en: "",
+                                price: "0.89$",
+                                name_ar: "محمرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Thym",
+                                description_en: "",
+                                price: "0.77$",
+                                name_ar: "زعتر",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Foul Modamas",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "صحن فول مدمس",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Labneh",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "صحن لبنة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Chanklich",
+                                description_en: "",
+                                price: "2.23$",
+                                name_ar: "صحن شنكليش",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Halloum",
+                                description_en: "",
+                                price: "2.23$",
+                                name_ar: "صحن حلوم",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Vegetables",
+                                description_en: "",
+                                price: "0.56$",
+                                name_ar: "صحن خضرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Makdous",
+                                description_en: "",
+                                price: "0.67$",
+                                name_ar: "صحن مكدوس",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Olives",
+                                description_en: "",
+                                price: "0.67$",
+                                name_ar: "صحن زيتون",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Mortadella",
+                                description_en: "",
+                                price: "1.67$",
+                                name_ar: "صحن مرتديلا",
+                                description_ar: "",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Special Atyab Kaake",
+                        items: [
+                            {
+                                name_en: "Oatmeal Kaake",
+                                description_en: "",
+                                price: "0.56$",
+                                name_ar: "كعكة شوفان",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Labneh",
+                                description_en: "Labneh, Cucumber, Rocca, Mint, Tomato, Zaatar",
+                                price: "2.78$",
+                                name_ar: "لبنة",
+                                description_ar: "لبنة، خيار، روكا، نعنع، بندورة، زعتر",
+                            },
+                            {
+                                name_en: "Halloumi",
+                                description_en: "Halloumi, Cucumber, Rocca, Tomato, Oregano",
+                                price: "2.78$",
+                                name_ar: "حلوم",
+                                description_ar: "حلوم، خيار، روكا، بندورة، اوريجانو",
+                            },
+                            {
+                                name_en: "Turkey",
+                                description_en: "Turkey, Lettuce, Cucumber, Tomato",
+                                price: "3.34$",
+                                name_ar: "حبش",
+                                description_ar: "حبش، خس، خيار، بندورة",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Kaek Classic",
+                        items: [
+                            {
+                                name_en: "Kaek Sumac",
+                                description_en: "",
+                                price: "0.34$",
+                                name_ar: "كعكة بسماق",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Labneh",
+                                description_en: "",
+                                price: "1.67$",
+                                name_ar: "كعكة لبنة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Labneh + Vegetables",
+                                description_en: "",
+                                price: "2.23$",
+                                name_ar: "كعكة لبنة وخضرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Keshek",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "كعكة كشك",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "كعكة جبنة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Jambon",
+                                description_en: "",
+                                price: "3.12$",
+                                name_ar: "كعكة جبنة وجبون",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Halloumi",
+                                description_en: "",
+                                price: "2.78$",
+                                name_ar: "كعكة جبنة وحلوم",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Corn + Olive",
+                                description_en: "",
+                                price: "2.56$",
+                                name_ar: "كعكة جبنة وذرة وزيتون",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Picon",
+                                description_en: "",
+                                price: "2.23$",
+                                name_ar: "كعكة جبنة بيكون",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Pepperoni",
+                                description_en: "",
+                                price: "4.23$",
+                                name_ar: "كعكة جبنة وببيروني",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Pepperoni (Large)",
+                                description_en: "",
+                                price: "5.34$",
+                                name_ar: "كعكة جبنة ببيروني (كبير)",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Mohamarra",
+                                description_en: "",
+                                price: "2.23$",
+                                name_ar: "كعكة جبنة ومحمرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Mohamarra",
+                                description_en: "",
+                                price: "1.34$",
+                                name_ar: "كعكة محمرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Zaatar",
+                                description_en: "",
+                                price: "0.67$",
+                                name_ar: "كعكة زعتر",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Zaatar + Vegetables",
+                                description_en: "",
+                                price: "1.67$",
+                                name_ar: "كعكة زعتر وخضرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Mortadella + Mozarella",
+                                description_en: "",
+                                price: "2.56$",
+                                name_ar: "كعكة مرتديلا وموزاريلا",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Picon",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "كعكة بيكون",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Chanklish",
+                                description_en: "",
+                                price: "2.23$",
+                                name_ar: "كعكة شنكليش",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Omelette",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "كعكة اومليت",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Omelette + Vegetables",
+                                description_en: "",
+                                price: "2.56$",
+                                name_ar: "كعكة اومليت وخضرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Omelette + Cheese",
+                                description_en: "",
+                                price: "2.23$",
+                                name_ar: "كعكة اومليت جبنة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "4 Cheese",
+                                description_en: "Sitos, BBQ sauce",
+                                price: "3.34$",
+                                name_ar: "كعكة جبنة (فور)",
+                                description_ar: "سيتوس، صلصة باربيكيو",
+                            },
+                            {
+                                name_en: "Submarine",
+                                description_en: "Ham / Turkey, Salami, 4 Cheese, Lettuce, Pickles, Tomato, Mustard Sauce",
+                                price: "5.56$",
+                                name_ar: "ساب مارين",
+                                description_ar: "حبش، سلامي، ٤ جبنة، خس، كبيس، بندورة، صلصة خردل",
+                            },
+                            {
+                                name_en: "Turkey",
+                                description_en: "Cheese, Mayo Sauce, Lettuce, Pickles",
+                                price: "5$",
+                                name_ar: "جيش",
+                                description_ar: "جبنة، مايونيز، خس، كبيس",
+                            },
+                            {
+                                name_en: "Halloumi",
+                                description_en: "Halloumi Burger: Pesto Sauce, Rocca, Tomato",
+                                price: "5$",
+                                name_ar: "حلوم",
+                                description_ar: "جبنة حلوم؛ صلصة بيستو، روكا، بندورة",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Kaek Beef",
+                        items: [
+                            {
+                                name_en: "Soujouk",
+                                description_en: "Tomato Sauce, Cheese, Pickles, Tomato",
+                                price: "5.56$",
+                                name_ar: "سجق",
+                                description_ar: "صلصة بندورة، جبنة، كبيس، بندورة",
+                            },
+                            {
+                                name_en: "Kafta",
+                                description_en: "Tomato Sauce, Cheese, Pickles",
+                                price: "5.56$",
+                                name_ar: "كفتة",
+                                description_ar: "صلصة بندورة، جبنة، كبيس",
+                            },
+                            {
+                                name_en: "Kabab",
+                                description_en: "Tomato Sauce, Cheese, Pickles",
+                                price: "5.56$",
+                                name_ar: "كباب",
+                                description_ar: "صلصة بندورة، جبنة، كبيس",
+                            },
+                            {
+                                name_en: "Philadelphia",
+                                description_en: "Philadelphia, Avocado Sauce, Cheese",
+                                price: "6.67$",
+                                name_ar: "فيلادلفيا",
+                                description_ar: "فيلادلفيا، صلصة أفوكادو، جبنة",
+                            },
+                            {
+                                name_en: "Burger",
+                                description_en: "Meat / Chicken, Coleslaw, Cocktail Sauce, Cheese, Pickles, Onion, Tomato",
+                                price: "6.67$",
+                                name_ar: "برغر",
+                                description_ar: "لحم / دجاج، خس، صلصة كوكتيل، جبنة، كبيس، بصل، بندورة",
+                            },
+                            {
+                                name_en: "Hotdog",
+                                description_en: "Cheese, Potato Stix, Cocktail & BBQ Sauce",
+                                price: "5.56$",
+                                name_ar: "هوت دوغ",
+                                description_ar: "جبنة، بطاطا، صلصة كوكتيل وباربيكيو",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Kaek Chicken",
+                        items: [
+                            {
+                                name_en: "Chicken Fajita",
+                                description_en: "Avocado Sauce, Cheese",
+                                price: "6.45$",
+                                name_ar: "فاهيتا دجاج",
+                                description_ar: "صلصة أفوكادو، جبنة",
+                            },
+                            {
+                                name_en: "Chicken Honey",
+                                description_en: "Ham / Turkey, Cheese, Lettuce, Honey Mustard Sauce",
+                                price: "6.67$",
+                                name_ar: "دجاج بالعسل",
+                                description_ar: "حبش أو جمبون، جبنة، خس، صلصة خردل بالعسل",
+                            },
+                            {
+                                name_en: "Chicken Taouk",
+                                description_en: "Taouk, Cheese, Mayo Sauce, Pickles, Corn, Lettuce",
+                                price: "6.12$",
+                                name_ar: "طاوق",
+                                description_ar: "طاوق، جبنة، مايونيز، كبيس، خس",
+                            },
+                            {
+                                name_en: "Chicken Pesto",
+                                description_en: "Chicken, Pesto Sauce, Cheese, Lettuce",
+                                price: "5.56$",
+                                name_ar: "دجاج بالبيستو",
+                                description_ar: "دجاج، صلصة بيستو، جبنة، خس",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Kaek Pizza",
+                        items: [
+                            {
+                                name_en: "Vegetarian",
+                                description_en: "Tomato Sauce, Corn, Olive, Mushroom, Green Pepper, 4 Cheese",
+                                price: "5$",
+                                name_ar: "بيتزا خضار",
+                                description_ar: "صلصة بندورة، ذرة، زيتون، فطر، فليفلة خضرة، فور جبن",
+                            },
+                            {
+                                name_en: "Mexicano",
+                                description_en: "BBQ Sauce, Ham / Turkey, Tortilla Chips, Hallapino, Green Pepper, Mushroom, Corn, 4 Cheese",
+                                price: "6.67$",
+                                name_ar: "بيتزا مكسيكانو",
+                                description_ar: "صلصة باربيكيو، جامبون / حبش، تشيبس تورتيلا، هالابينو، فليفلة خضرة، فطر، ذرة، فور جبن",
+                            },
+                            {
+                                name_en: "Margherita",
+                                description_en: "Tomato Sauce, 4 Cheese",
+                                price: "4.45$",
+                                name_ar: "بيتزا مارغريتا",
+                                description_ar: "صلصة بندورة، فور جبن",
+                            },
+                            {
+                                name_en: "Pepperoni",
+                                description_en: "BBQ Sauce, Ham / Turkey, 4 Cheese, Pepperoni",
+                                price: "7.23$",
+                                name_ar: "بيتزا ببيروني",
+                                description_ar: "صلصة باربيكيو، حبش / لحوم، فور جبن، ببيروني",
+                            },
+                            {
+                                name_en: "Classic Pizza",
+                                description_en: "Tomato Sauce, Ham / Turkey, Salami, Green Pepper, Mushroom, Olive, 4 Cheese",
+                                price: "6.12$",
+                                name_ar: "بيتزا كلاسيك",
+                                description_ar: "صلصة بندورة، حبش / لحوم، حبش، سلامي، فليفلة خضرة، فطر، زيتون، فور جبن",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Salads",
+                        items: [
+                            {
+                                name_en: "Chicken Cezar Salad",
+                                description_en: "Lettuce, Cherry Tomatoes, Parmesan, Chicken, Mayo Sauce",
+                                price: "6.67$",
+                                name_ar: "سلطة تشكن سيزر",
+                                description_ar: "خس، بندورة كرزية، جبنة بارمزان، دجاج، صلصة مايونيز",
+                            },
+                            {
+                                name_en: "Tuna Salad",
+                                description_en: "Lettuce, Cherry Tomatoes, Corn, Tuna, Mustard Sauce",
+                                price: "5$",
+                                name_ar: "سلطة تونا",
+                                description_ar: "خس، بندورة كرزية، ذرة، تونا، صلصة خردل",
+                            },
+                            {
+                                name_en: "Greek Salad",
+                                description_en: "Lettuce, Cherry Tomatoes, Cucumber, Olives, Corn, Fetta, Cheese Sauce",
+                                price: "5$",
+                                name_ar: "سلطة يونانية",
+                                description_ar: "خس، بندورة كرزية، خيار، زيتون، ذرة، فتر، صلصة جبنة",
+                            },
+                            {
+                                name_en: "Grilled Wedges Potatoes",
+                                description_en: "",
+                                price: "1.12$",
+                                name_ar: "بطاطا مشوية",
+                                description_ar: "",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Sauces",
+                        items: [
+                            {
+                                name_en: "Avocado Sauce",
+                                description_en: "",
+                                price: "1.34$",
+                                name_ar: "صلصة أفوكادو",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cocktail Sauce",
+                                description_en: "",
+                                price: "0.56$",
+                                name_ar: "صلصة كوكتيل",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Mustard Honey",
+                                description_en: "",
+                                price: "1.12$",
+                                name_ar: "صلصة خردل بالعسل",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Pesto Sauce",
+                                description_en: "",
+                                price: "1.12$",
+                                name_ar: "صلصة بيستو",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Mayo Sauce",
+                                description_en: "",
+                                price: "0.56$",
+                                name_ar: "صلصة مايونيز",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Mustard Sauce",
+                                description_en: "",
+                                price: "0.56$",
+                                name_ar: "صلصة خردل",
+                                description_ar: "",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Desserts",
+                        items: [
+                            {
+                                name_en: "Tacos (Special Atyab Kaake)",
+                                description_en: "Choco banana, Caramelo",
+                                price: "3.34$",
+                                name_ar: "تاكوس (كاكة أطيب)",
+                                description_ar: "شوكلت موز، كراميلو",
+                            },
+                            {
+                                name_en: "Marshmello",
+                                description_en: "",
+                                price: "2.23$",
+                                name_ar: "مارشميلو",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Tiramisu",
+                                description_en: "",
+                                price: "3.34$",
+                                name_ar: "تيراميسو",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Nutella",
+                                description_en: "",
+                                price: "1.67$",
+                                name_ar: "نوتيلا",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Nutella + Fruits",
+                                description_en: "",
+                                price: "2.23$",
+                                name_ar: "نوتيلا + فواكه",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Hallawi",
+                                description_en: "",
+                                price: "1.12$",
+                                name_ar: "حلاوي",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Hallawi, Banana, Honey / Chocolate",
+                                description_en: "",
+                                price: "2.78$",
+                                name_ar: "حلاوي، موز، عسل / شوكلت",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Sushi",
+                                description_en: "",
+                                price: "5$",
+                                name_ar: "سوشي",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Double Cream",
+                                description_en: "",
+                                price: "3.89$",
+                                name_ar: "دبل كريم",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Double Cream Avocado",
+                                description_en: "",
+                                price: "4.45$",
+                                name_ar: "دبل كريم افوكادو",
+                                description_ar: "",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Hot Beverage",
+                        items: [
+                            {
+                                name_en: "Black Tea",
+                                description_en: "",
+                                price: "0.28$",
+                                name_ar: "شاي أسود",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Green Tea",
+                                description_en: "",
+                                price: "0.28$",
+                                name_ar: "شاي أخضر",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Turkey Coffee",
+                                description_en: "",
+                                price: "0.34$",
+                                name_ar: "قهوة تركي",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Nescafe",
+                                description_en: "",
+                                price: "0.45$",
+                                name_ar: "نسكافيه",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Hot Chocolate",
+                                description_en: "",
+                                price: "0.45$",
+                                name_ar: "هوت شوكلت",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cappucino",
+                                description_en: "",
+                                price: "0.45$",
+                                name_ar: "كابتشينو",
+                                description_ar: "",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Cold Beverage",
+                        items: [
+                            {
+                                name_en: "Soft Drink",
+                                description_en: "",
+                                price: "0.56$",
+                                name_ar: "مشروب غازي",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Juice",
+                                description_en: "",
+                                price: "0.28$",
+                                name_ar: "عصير",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Water",
+                                description_en: "",
+                                price: "0.28$",
+                                name_ar: "ماء",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "3iran",
+                                description_en: "",
+                                price: "0.56$",
+                                name_ar: "عيران",
+                                description_ar: "",
+                            }
+                        ]
+                    }
+                ]
+            },
+            ehden: {
+                phone: "03 45 00 11 | 03 03 66 16",
+                hours: "Monday - Sunday: 10:00 AM - 12:00 AM",
+                categories: [
+                    {
+                        category: "Kaek Classic",
+                        items: [
+                            {
+                                name_en: "Cheese",
+                                description_en: "",
+                                price: "3.34$",
+                                name_ar: "كعكة جبنة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Mohamara",
+                                description_en: "",
+                                price: "3.56$",
+                                name_ar: "كعكة جبنة محمرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Mortadella",
+                                description_en: "",
+                                price: "3.89$",
+                                name_ar: "كعكة جبنة و مرتديلا",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Jambon",
+                                description_en: "",
+                                price: "3.89$",
+                                name_ar: "جبنة وجبون",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Halloumi",
+                                description_en: "",
+                                price: "3.89$",
+                                name_ar: "كعكة جبنة وحلوم",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Picon",
+                                description_en: "",
+                                price: "3$",
+                                name_ar: "كعكة بيكون",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Picon + Cheese",
+                                description_en: "",
+                                price: "3.56$",
+                                name_ar: "كعكة بيكون وجبنة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Corn",
+                                description_en: "",
+                                price: "3.56$",
+                                name_ar: "كعكة جبنة وذرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Cheese + Corn + Olive",
+                                description_en: "",
+                                price: "3.89$",
+                                name_ar: "كعكة جبنة وذرة وزيتون",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Zaatar + Vegetables",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "كعكة زعتر وخضرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Labneh + Vegetables",
+                                description_en: "",
+                                price: "2.78$",
+                                name_ar: "كعكة لبنة وخضرة",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "4 Cheese",
+                                description_en: "Sitos, BBQ sauce",
+                                price: "5$",
+                                name_ar: "كعكة جبنة (فور)",
+                                description_ar: "سيتوس، صلصة باربيكيو",
+                            },
+                            {
+                                name_en: "Submarine",
+                                description_en: "Ham / Turkey, Salami, 4 Cheese, Lettuce, Pickles, Tomato, Mustard Sauce",
+                                price: "7.23$",
+                                name_ar: "ساب مارين",
+                                description_ar: "حبش/جمبون، سلامي، فور جبنة، خس، كبيس، بندورة، صلصة خردل",
+                            },
+                            {
+                                name_en: "Turkey",
+                                description_en: "Cheese, Mayo Sauce, Lettuce, Pickles",
+                                price: "6$",
+                                name_ar: "حبش",
+                                description_ar: "جبنة، مايونيز، خس، كبيس",
+                            },
+                            {
+                                name_en: "Halloumi",
+                                description_en: "Halloumi Burger: Pesto Sauce, Rocca, Tomato",
+                                price: "6$",
+                                name_ar: "حلوم",
+                                description_ar: "جبنة حلوم، صلصة بيستو، روكا، بندورة",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Kaek Beef",
+                        items: [
+                            {
+                                name_en: "Soujouk",
+                                description_en: "Tomato Sauce, Cheese, Pickles, Tomato",
+                                price: "7.23$",
+                                name_ar: "سجق",
+                                description_ar: "صلصة بندورة، جبنة، كبيس، بندورة",
+                            },
+                            {
+                                name_en: "Kafta",
+                                description_en: "Tomato Sauce, Cheese, Pickles",
+                                price: "7.23$",
+                                name_ar: "كفتة",
+                                description_ar: "صلصة بندورة، جبنة، كبيس",
+                            },
+                            {
+                                name_en: "Philadelphia",
+                                description_en: "Philadelphia, Avocado Sauce, Cheese",
+                                price: "8.89$",
+                                name_ar: "فيلادلفيا",
+                                description_ar: "فيلادلفيا، صلصة أفوكادو، جبنة",
+                            },
+                            {
+                                name_en: "Burger",
+                                description_en: "Meat / Chicken, Coleslaw, Cocktail Sauce, Cheese, Pickles, Onion, Tomato",
+                                price: "7.56$",
+                                name_ar: "برغر",
+                                description_ar: "لحم / دجاج، خس، صلصة كوكتيل، جبنة، كبيس، بصل، بندورة",
+                            },
+                            {
+                                name_en: "Hotdog",
+                                description_en: "Cheese, Potato Stix, Cocktail & BBQ Sauce",
+                                price: "7.23$",
+                                name_ar: "هوت دوغ",
+                                description_ar: "جبنة، بطاطا، صلصة كوكتيل وباربيكيو",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Kaek Chicken",
+                        items: [
+                            {
+                                name_en: "Chicken Fajita",
+                                description_en: "Avocado Sauce, Cheese",
+                                price: "8.34$",
+                                name_ar: "فاهيتا دجاج",
+                                description_ar: "صلصة أفوكادو، جبنة",
+                            },
+                            {
+                                name_en: "Chicken Honey",
+                                description_en: "Ham / Turkey, Cheese, Lettuce, Honey Mustard Sauce",
+                                price: "8.34$",
+                                name_ar: "دجاج بالعسل",
+                                description_ar: "حبش أو جمبون، جبنة، خس، صلصة خردل بالعسل",
+                            },
+                            {
+                                name_en: "Chicken Taouk",
+                                description_en: "Taouk, Cheese, Mayo Sauce, Pickles, Corn, Lettuce",
+                                price: "8$",
+                                name_ar: "طاوق",
+                                description_ar: "طاوق، جبنة، مايونيز، كبيس، خس",
+                            },
+                            {
+                                name_en: "Chicken Pesto",
+                                description_en: "Chicken, Pesto Sauce, Cheese, Lettuce",
+                                price: "7$",
+                                name_ar: "دجاج بالبيستو",
+                                description_ar: "دجاج، صلصة بيستو، جبنة، خس",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Kaek Pizza",
+                        items: [
+                            {
+                                name_en: "Vegetarian",
+                                description_en: "Tomato Sauce, Corn, Olive, Mushroom, Green Pepper, 4 Cheese",
+                                price: "6.12$",
+                                name_ar: "بيتزا خضار",
+                                description_ar: "صلصة بندورة، ذرة، زيتون، فطر، فليفلة خضرة، فور جبن",
+                            },
+                            {
+                                name_en: "Mexicano",
+                                description_en: "BBQ Sauce, Ham / Turkey, Tortilla Chips, Hallapino, Green Pepper, Mushroom, Corn, 4 Cheese",
+                                price: "7.8$",
+                                name_ar: "بيتزا مكسيكانو",
+                                description_ar: "صلصة باربيكيو، حبش / جمبون، تشيبس تورتيلا، هالابينو، فليفلة خضرة، فطر، ذرة، فور جبن",
+                            },
+                            {
+                                name_en: "Margherita",
+                                description_en: "Tomato Sauce, 4 Cheese",
+                                price: "6.12$",
+                                name_ar: "بيتزا مارغريتا",
+                                description_ar: "صلصة بندورة، فور جبن",
+                            },
+                            {
+                                name_en: "Pepperoni",
+                                description_en: "BBQ Sauce, Ham / Turkey, 4 Cheese, Pepperoni",
+                                price: "8.89$",
+                                name_ar: "بيتزا ببيروني",
+                                description_ar: "صلصة باربيكيو، حبش / جمبون، فور جبن، ببيروني",
+                            },
+                            {
+                                name_en: "Classic Pizza",
+                                description_en: "Tomato Sauce, Ham / Turkey, Salami, Green Pepper, Mushroom, Olive, 4 Cheese",
+                                price: "7.23$",
+                                name_ar: "بيتزا كلاسيك",
+                                description_ar: "صلصة بندورة، حبش / جمبون، حبش، سلامي، فليفلة خضرة، فطر، زيتون، فور جبن",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Salads",
+                        items: [
+                            {
+                                name_en: "Chicken Cezar Salad",
+                                description_en: "Lettuce, Cherry Tomatoes, Parmesan, Chicken, Mayo Sauce",
+                                price: "7.78$",
+                                name_ar: "سلطة تشكن سيزر",
+                                description_ar: "خس، بندورة كرزية، جبنة بارمزان، دجاج، صلصة مايونيز",
+                            },
+                            {
+                                name_en: "Tuna Salad",
+                                description_en: "Lettuce, Cherry Tomatoes, Corn, Tuna, Mustard Sauce",
+                                price: "6.12$",
+                                name_ar: "سلطة تونا",
+                                description_ar: "خس، بندورة كرزية، ذرة، تونا، صلصة خردل",
+                            },
+                            {
+                                name_en: "Greek Salad",
+                                description_en: "Lettuce, Cherry Tomatoes, Cucumber, Olives, Corn, Fetta, Cheese Sauce",
+                                price: "6.12$",
+                                name_ar: "سلطة يونانية",
+                                description_ar: "خس، بندورة كرزية، خيار، زيتون، ذرة، فتر، صلصة جبنة",
+                            },
+                            {
+                                name_en: "Grilled Wedges Potatoes",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "بطاطا مشوية",
+                                description_ar: "",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Desserts",
+                        items: [
+                            {
+                                name_en: "Nutella",
+                                description_en: "",
+                                price: "2.78$",
+                                name_ar: "نوتيلا",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Nutella + Fruits",
+                                description_en: "",
+                                price: "3.34$",
+                                name_ar: "نوتيلا + فواكه",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Nutella + Marshmallow",
+                                description_en: "",
+                                price: "3.34$",
+                                name_ar: "نوتيلا + مارشميلو",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Nutella + (Lotus / KitKat / Oreo / kinder)",
+                                description_en: "",
+                                price: "3.34$",
+                                name_ar: "نوتيلا + (لوتس / كيت كات / أوريو / كندر)",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Jello",
+                                description_en: "",
+                                price: "1.67$",
+                                name_ar: "جيلي",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Custard",
+                                description_en: "",
+                                price: "2$",
+                                name_ar: "كاسترد",
+                                description_ar: "",
+                            }
+                        ]
+                    },
+                    {
+                        category: "Drinks",
+                        items: [
+                            {
+                                name_en: "Pepsi",
+                                description_en: "",
+                                price: "1$",
+                                name_ar: "بيبسي",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Juice",
+                                description_en: "",
+                                price: "0.33$",
+                                name_ar: "عصير",
+                                description_ar: "",
+                            },
+                            {
+                                name_en: "Water",
+                                description_en: "",
+                                price: "0.50$",
+                                name_ar: "ماء",
+                                description_ar: "",
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        function showMenu(branch) {
+            document.querySelector('header').classList.add('hide-menu-title', 'show-logo');
+
+            let branchInfo = menus[branch];
+
+            let menuHTML = `
+    <div class="branch">
+        <div class="menu-header">
+            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center;">
+            <div style="display:flex; flex-direction:row;justify-content:center; align-items:center;">
+                <button class="back-button" onclick="goBack()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+            <h2 style="color: #653C13; margin: 0;">${branch.charAt(0).toUpperCase() + branch.slice(1)} Menu</h2>
+            </div>
+            <p style="color: #653C13; margin: 0;">${branchInfo.phone}</p>
+            <p style="color: #653C13; margin: 0;">${branchInfo.hours}</p>
+            </div>
+            </div>`;
+
+            branchInfo.categories.forEach(category => {
+                menuHTML += `<div class="category">${category.category}</div>`;
+                category.items.forEach((item, index) => {
+                    let lastItemClass = index === category.items.length - 1 ? ' last-item' : '';
+                    menuHTML += `
+            <div class="menu-item${lastItemClass}">
+                <div>
+                    <h3>${item.name_en}</h3>
+                    <p>${item.description_en}</p>
+                </div>
+                <div class="price">${item.price}</div>
+                <div style="text-align: right;">
+                    <h3>${item.name_ar}</h3>
+                    <p>${item.description_ar}</p>
+                </div>
+            </div>`;
+                });
+            });
+
+            menuHTML += `</div>`;
+            document.getElementById('menu').innerHTML = menuHTML;
+            document.getElementById('buttons').style.display = 'none';
+        }
+
+        function goBack() {
+            document.querySelector('header').classList.remove('hide-menu-title', 'show-logo');
+            document.getElementById('menu').innerHTML = '';
+            document.getElementById('buttons').style.display = 'block';
+        }
+
+    </script>
 </body>
 
-</html>"
+</html>
